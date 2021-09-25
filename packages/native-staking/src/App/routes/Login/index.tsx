@@ -8,7 +8,7 @@ export function Login(): JSX.Element {
   return (
     <LoginDesign
       pathAfterLogin={pathValidators}
-      appName="Staking service"
+      appName="Juno Staking"
       appLogo={cosmWasmLogo}
       config={config}
     />
