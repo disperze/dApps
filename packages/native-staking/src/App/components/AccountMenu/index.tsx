@@ -1,4 +1,5 @@
-import { useSdk } from "@cosmicdapp/logic";
+import { useSdk, printableBalance } from "@cosmicdapp/logic";
+import { Typography } from "antd";
 import copyToClipboard from "clipboard-copy";
 import React, { useState } from "react";
 import avatarIcon from "./assets/avatar.svg";
@@ -17,13 +18,14 @@ import {
   NameText,
   OpenMenuButton,
 } from "./style";
+const { Text } = Typography;
 
 export interface AccountMenuProps extends React.HTMLAttributes<HTMLOrSVGElement> {
   readonly name?: string;
 }
 
 export function AccountMenu({ name, ...props }: AccountMenuProps): JSX.Element {
-  const { address } = useSdk();
+  const { address, balance } = useSdk();
 
   // NOTE Link functionality not clear, removing for now
   /* const history = useHistory();
@@ -54,6 +56,7 @@ export function AccountMenu({ name, ...props }: AccountMenuProps): JSX.Element {
                 <img src={avatarIcon} alt="Avatar" />
                 <NameText>{accountName} account</NameText>
               </AvatarName>
+              <Text style={{color: "white"}}>({printableBalance(balance)})</Text>
               <AddressCopyBox>
                 <AddressText>{address}</AddressText>
                 <AddressCopy
