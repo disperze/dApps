@@ -9,6 +9,7 @@ import {
   useSdk,
   WalletLoader,
 } from "@cosmicdapp/logic";
+import { GlobalOutlined, UsbOutlined } from "@ant-design/icons";
 import { Button, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -106,10 +107,10 @@ export function Login({ config, pathAfterLogin, appName, appLogo, ...restProps }
             Browser (Demo)
           </Button>
           <Button type="primary" disabled={disableLedgerLogin()} onClick={initLedger}>
-            Ledger (Secure, Chrome)
+            <UsbOutlined /> Ledger (Secure, Chrome)
           </Button>
           <Button type="primary" disabled={disableKeplrLogin()} onClick={initKeplr}>
-            Keplr (Secure)
+            <GlobalOutlined /> Keplr (Secure)
           </Button>
         </WelcomeStack>
       </MainStack>
