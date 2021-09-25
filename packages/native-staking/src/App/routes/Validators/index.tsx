@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AccountMenu } from "../../components/AccountMenu";
 import { pathValidators } from "../../paths";
+import { formatCommission } from "../../utils/staking";
 import { BorderContainer, MainStack, MenuHeader, ValidatorStack } from "./style";
 
 const { Title, Text } = Typography;
@@ -62,13 +63,6 @@ export function Validators(): JSX.Element {
 
   function goToValidator(address: string) {
     history.push(`${pathValidators}/${address}`);
-  }
-
-  function formatCommission(value: string): string {
-    const val = value.slice(0, -14);
-    if (!val) return "0 %";
-
-    return `${parseInt(val)/100} %`;
   }
 
   return (

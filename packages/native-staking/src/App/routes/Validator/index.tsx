@@ -9,7 +9,7 @@ import { config } from "../../../config";
 import { DataList } from "../../components/DataList";
 import { HeaderBackMenu } from "../../components/HeaderBackMenu";
 import { pathDelegate, pathRewards, pathUndelegate, pathValidators } from "../../paths";
-import { StakingValidator, useStakingValidator } from "../../utils/staking";
+import { formatCommission, StakingValidator, useStakingValidator } from "../../utils/staking";
 import { ButtonStack, MainStack, TitleNavStack } from "./style";
 
 const { Title } = Typography;
@@ -20,7 +20,7 @@ function getValidatorMap(balance: Decimal, validator?: StakingValidator) {
   const tokensCoin: Coin = { denom: config.stakingToken, amount: validator.tokens };
   const tokensAmount = nativeCoinToDisplay(tokensCoin, config.coinMap).amount;
   const tokens = `${tokensAmount} ${config.coinMap[config.stakingToken].denom}`;
-  const commissionPercent = `${validator.commission.commissionRates.rate.slice(0, -16)} %`;
+  const commissionPercent = formatCommission(validator.commission.commissionRates.rate);
 
   return {
     Tokens: tokens,

@@ -54,3 +54,10 @@ export function formatUpdateTime(updateTime: string): string {
     day: "2-digit",
   });
 }
+
+export function formatCommission(value: string): string {
+  const val = value.slice(0, -14);
+  if (!val) return "0 %";
+
+  return `${parseInt(val)/100} %`;
+}
