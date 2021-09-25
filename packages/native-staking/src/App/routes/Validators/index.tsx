@@ -12,6 +12,7 @@ const { Title, Text } = Typography;
 interface ValidatorData {
   readonly name: string;
   readonly address: string;
+  readonly commission: string;
 }
 
 function validatorCompare(a: ValidatorData, b: ValidatorData) {
@@ -19,6 +20,19 @@ function validatorCompare(a: ValidatorData, b: ValidatorData) {
     return -1;
   }
   if (a.name > b.name) {
+    return 1;
+  }
+  return 0;
+}
+
+function validatorCompareCommission(a: ValidatorData, b: ValidatorData) {
+  const feeA = parseInt(a.commission);
+  const feeB = parseInt(b.commission);
+
+  if (feeA < feeB) {
+    return -1;
+  }
+  if (feeA > feeB) {
     return 1;
   }
   return 0;
@@ -37,6 +51,7 @@ export function Validators(): JSX.Element {
         .map((validator) => ({
           name: validator.description.moniker,
           address: validator.operatorAddress,
+          commission: validator.commission.commissionRates.rate
         }))
         .sort(validatorCompare);
 
@@ -46,6 +61,10 @@ export function Validators(): JSX.Element {
 
   function goToValidator(address: string) {
     history.push(`${pathValidators}/${address}`);
+  }
+
+  function formatCommission(value: string): string {
+    return `${parseInt(value.slice(0, -14))/100} %`;
   }
 
   return (
