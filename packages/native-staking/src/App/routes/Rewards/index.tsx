@@ -63,24 +63,8 @@ export function Rewards(): JSX.Element {
   async function withdrawRewards() {
     setLoading(true);
 
-    const withdrawRewardsMsg: EncodeMsgWithdrawDelegatorReward = {
-      typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
-      value: {
-        delegatorAddress: address,
-        validatorAddress: validatorAddress,
-      },
-    };
-
-    const fee = {
-      amount: coins(
-        config.gasPrice * 10 ** config.coinMap[config.feeToken].fractionalDigits,
-        config.feeToken,
-      ),
-      gas: "1500000",
-    };
-
     try {
-      const response = await getClient().signAndBroadcast(address, [withdrawRewardsMsg], fee);
+      const response = await getClient().withdrawRewards(address, validatorAddress);
       if (isBroadcastTxFailure(response)) {
         throw Error("Rewards withdrawal failed");
       }

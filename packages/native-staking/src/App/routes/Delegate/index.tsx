@@ -33,25 +33,8 @@ export function Delegate(): JSX.Element {
     const nativeAmountString = displayAmountToNative(amount, config.coinMap, config.stakingToken);
     const nativeAmountCoin: Coin = { amount: nativeAmountString, denom: config.stakingToken };
 
-    const delegateMsg: EncodeMsgDelegate = {
-      typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
-      value: {
-        delegatorAddress: address,
-        validatorAddress: validatorAddress,
-        amount: nativeAmountCoin,
-      },
-    };
-
-    const fee = {
-      amount: coins(
-        config.gasPrice * 10 ** config.coinMap[config.feeToken].fractionalDigits,
-        config.feeToken,
-      ),
-      gas: "1500000",
-    };
-
     try {
-      const response = await getClient().signAndBroadcast(address, [delegateMsg], fee);
+      const response = await getClient().delegateTokens(address, validatorAddress, nativeAmountCoin);
       if (isBroadcastTxFailure(response)) {
         throw Error("Delegate failed");
       }

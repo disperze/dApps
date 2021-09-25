@@ -32,25 +32,8 @@ export function Undelegate(): JSX.Element {
     const nativeAmountString = displayAmountToNative(amount, config.coinMap, config.stakingToken);
     const nativeAmountCoin: Coin = { amount: nativeAmountString, denom: config.stakingToken };
 
-    const undelegateMsg: EncodeMsgUndelegate = {
-      typeUrl: "/cosmos.staking.v1beta1.MsgUndelegate",
-      value: {
-        delegatorAddress: address,
-        validatorAddress: validatorAddress,
-        amount: nativeAmountCoin,
-      },
-    };
-
-    const fee = {
-      amount: coins(
-        config.gasPrice * 10 ** config.coinMap[config.feeToken].fractionalDigits,
-        config.feeToken,
-      ),
-      gas: "1500000",
-    };
-
     try {
-      const response = await getClient().signAndBroadcast(address, [undelegateMsg], fee);
+      const response = await getClient().undelegateTokens(address, validatorAddress, nativeAmountCoin);
       if (isBroadcastTxFailure(response)) {
         throw Error("Undelegate failed");
       }
