@@ -102,7 +102,7 @@ export function Login({ config, pathAfterLogin, appName, appLogo, ...restProps }
             <LightText>Select one of the following options to start:</LightText>
           </Typography>
           {error && <ErrorText>{error}</ErrorText>}
-          <Button type="primary" onClick={initBrowser}>
+          <Button type="primary" onClick={initBrowser} style={{display: "none"}}>
             Browser (Demo)
           </Button>
           <Button type="primary" disabled={disableLedgerLogin()} onClick={initLedger}>
