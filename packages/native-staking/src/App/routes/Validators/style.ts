@@ -20,7 +20,7 @@ export const ValidatorStack = styled(Stack)`
   }
 `;
 
-export const ValidatorItem = styled.div`
+export const BorderContainer = styled.div`
   --v-padding: var(--s-2);
   --border-size: 1px;
 
@@ -65,9 +65,7 @@ export const ValidatorItem = styled.div`
       font-size: var(--s-1);
     }
   }
-`;
 
-export const BorderContainer = styled.div`
   border-top: var(--border-size) solid var(--color-primary);
   padding-top: var(--v-padding);
   margin-top: calc(-1 * var(--v-padding));

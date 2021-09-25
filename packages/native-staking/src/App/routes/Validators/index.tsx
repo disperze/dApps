@@ -1,11 +1,12 @@
 import { PageLayout } from "@cosmicdapp/design";
 import { useSdk } from "@cosmicdapp/logic";
 import { Typography } from "antd";
+import { Row, Col } from 'antd';
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AccountMenu } from "../../components/AccountMenu";
 import { pathValidators } from "../../paths";
-import { BorderContainer, MainStack, MenuHeader, ValidatorItem, ValidatorStack } from "./style";
+import { BorderContainer, MainStack, MenuHeader, ValidatorStack } from "./style";
 
 const { Title, Text } = Typography;
 
@@ -64,7 +65,10 @@ export function Validators(): JSX.Element {
   }
 
   function formatCommission(value: string): string {
-    return `${parseInt(value.slice(0, -14))/100} %`;
+    const val = value.slice(0, -14);
+    if (!val) return "0 %";
+
+    return `${parseInt(val)/100} %`;
   }
 
   return (
@@ -75,12 +79,25 @@ export function Validators(): JSX.Element {
         </MenuHeader>
         <Title>Validators</Title>
         <ValidatorStack>
+          <Row style={{marginBottom: "1.5rem"}}>
+            <Col span={16} style={{ textAlign: "left" }}>
+              <Text>Nombre</Text>
+            </Col>
+            <Col span={8} style={{ textAlign: "right" }}>
+              <Text>Commission</Text>
+            </Col>
+          </Row>
           {validatorsData.map((validator) => (
-            <ValidatorItem key={validator.name} onClick={() => goToValidator(validator.address)}>
-              <BorderContainer>
-                <Text>{validator.name}</Text>
-              </BorderContainer>
-            </ValidatorItem>
+            <BorderContainer key={validator.name}>
+              <Row onClick={() => goToValidator(validator.address)}>
+                <Col span={20} style={{textAlign: "left"}}>
+                  <Text>{validator.name}</Text>
+                </Col>
+                <Col span={4}>
+                  <Text>{formatCommission(validator.commission)}</Text>
+                </Col>
+              </Row>
+            </BorderContainer>
           ))}
         </ValidatorStack>
       </MainStack>
