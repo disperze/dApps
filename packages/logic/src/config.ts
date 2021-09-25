@@ -29,6 +29,7 @@ export interface KeplrConfig {
   };
   readonly bip44: { readonly coinType: number };
   readonly coinType: number;
+  readonly features?: string[];
 }
 
 export interface AppConfig {
@@ -107,5 +108,6 @@ export function configKeplr(config: AppConfig): KeplrConfig {
     },
     bip44: { coinType: 118 },
     coinType: 118,
+    features: ["stargate", 'ibc-transfer', 'cosmwasm']
   };
 }
