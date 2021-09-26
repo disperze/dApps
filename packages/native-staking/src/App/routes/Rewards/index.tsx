@@ -1,6 +1,6 @@
 import { Loading, PageLayout } from "@cosmicdapp/design";
 import { AppConfig, getErrorFromStackTrace, nativeCoinToDisplay, useSdk } from "@cosmicdapp/logic";
-import { Coin, coins } from "@cosmjs/stargate";
+import { Coin } from "@cosmjs/stargate";
 import { isBroadcastTxFailure } from "@cosmjs/stargate";
 import { Button, Typography } from "antd";
 import React, { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { DataList } from "../../components/DataList";
 import { HeaderBackMenu } from "../../components/HeaderBackMenu";
 import { pathOperationResult, pathRewards, pathValidators } from "../../paths";
-import { EncodeMsgWithdrawDelegatorReward, useStakingValidator } from "../../utils/staking";
+import { useStakingValidator } from "../../utils/staking";
 import { HeaderTitleStack, MainStack } from "./style";
 
 const { Title, Text } = Typography;

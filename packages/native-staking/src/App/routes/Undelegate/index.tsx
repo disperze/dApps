@@ -1,6 +1,6 @@
 import { Loading, PageLayout } from "@cosmicdapp/design";
 import { displayAmountToNative, getErrorFromStackTrace, useSdk } from "@cosmicdapp/logic";
-import { Coin, coins } from "@cosmjs/stargate";
+import { Coin } from "@cosmjs/stargate";
 import { isBroadcastTxFailure } from "@cosmjs/stargate";
 import { Typography } from "antd";
 import React, { useState } from "react";
@@ -8,7 +8,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { config } from "../../../config";
 import { HeaderBackMenu } from "../../components/HeaderBackMenu";
 import { pathOperationResult, pathUndelegate, pathValidators } from "../../paths";
-import { EncodeMsgUndelegate, useStakingValidator } from "../../utils/staking";
+import { useStakingValidator } from "../../utils/staking";
 import { FormUndelegateBalance, FormUndelegateBalanceFields } from "./FormUndelegateBalance";
 import { HeaderTitleStack, MainStack } from "./style";
 
