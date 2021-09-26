@@ -1,5 +1,5 @@
 import { useSdk, printableBalance } from "@cosmicdapp/logic";
-import { Typography } from "antd";
+import { Badge, Typography } from "antd";
 import copyToClipboard from "clipboard-copy";
 import React, { useState } from "react";
 import avatarIcon from "./assets/avatar.svg";
@@ -46,6 +46,10 @@ export function AccountMenu({ name, ...props }: AccountMenuProps): JSX.Element {
 
   return (
     <>
+      <Badge
+        count={"mainnet"}
+        style={{ backgroundColor: 'var(--color-primary)', marginTop: "8px" }}
+      />
       <OpenMenuButton src={openMenuButton} alt="Open account menu" onClick={openMenu} {...props} />
       {open && (
         <MenuCenter {...props}>

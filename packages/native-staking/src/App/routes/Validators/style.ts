@@ -11,7 +11,7 @@ export const MainStack = styled(Stack)`
 
 export const MenuHeader = styled.header`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 `;
 
 export const ValidatorStack = styled(Stack)`

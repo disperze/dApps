@@ -69,6 +69,7 @@ export function Validators(): JSX.Element {
     <PageLayout>
       <MainStack>
         <MenuHeader>
+          <span></span>
           <AccountMenu />
         </MenuHeader>
         <Title>Validators</Title>
