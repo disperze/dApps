@@ -76,7 +76,7 @@ export function Validators(): JSX.Element {
         <ValidatorStack>
           <Row style={{marginBottom: "1.5rem"}}>
             <Col span={16} style={{ textAlign: "left" }}>
-              <Text>Nombre</Text>
+              <Text>Validator</Text>
             </Col>
             <Col span={8} style={{ textAlign: "right" }}>
               <Text>Commission</Text>
