@@ -56,8 +56,8 @@ export function formatUpdateTime(updateTime: string): string {
 }
 
 export function formatCommission(value: string): string {
-  const val = value.slice(0, -14);
+  const val = value.slice(0, -16);
   if (!val) return "0 %";
 
-  return `${parseInt(val)/100} %`;
+  return `${val} %`;
 }
