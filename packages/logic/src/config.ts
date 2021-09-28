@@ -52,7 +52,7 @@ export interface NetworkConfigs {
 }
 
 export function getAppConfig(configs: NetworkConfigs): AppConfig {
-  const network = "lucinanet";
+  const network = process.env.REACT_APP_NETWORK;
   if (!network) return configs.local;
 
   const config = configs[network];
