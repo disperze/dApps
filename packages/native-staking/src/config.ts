@@ -41,15 +41,29 @@ const lucinanet: AppConfig = {
   addressPrefix: "juno",
   rpcUrl: "https://rpc.juno.giansalex.dev",
   httpUrl: "https://lcd.juno.giansalex.dev",
-  faucetUrl: "https://faucet.musselnet.cosmwasm.com",
+  faucetUrl: "",
   feeToken: "ujuno",
   stakingToken: "ujuno",
   coinMap: {
     ujuno: { denom: "JUNO", fractionalDigits: 6 },
   },
   gasPrice: 0.025,
-  codeId: 41,
 };
 
-const configs: NetworkConfigs = { local, musselnet, lucinanet };
+const heranet: AppConfig = {
+  chainId: "hera",
+  chainName: "Juno Hera",
+  addressPrefix: "juno",
+  rpcUrl: "https://rpc.hera.giansalex.dev",
+  httpUrl: "https://lcd.hera.giansalex.dev",
+  faucetUrl: "",
+  feeToken: "ujuno",
+  stakingToken: "ujuno",
+  coinMap: {
+    ujuno: { denom: "JUNO", fractionalDigits: 6 },
+  },
+  gasPrice: 0.025,
+};
+
+const configs: NetworkConfigs = { local, musselnet, lucinanet, heranet };
 export const config = getAppConfig(configs);
