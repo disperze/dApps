@@ -12,11 +12,8 @@ import { QueryPoolResponse } from "@cosmjs/stargate/build/codec/cosmos/staking/v
 export class AprClient {
   private queryClient: QueryClient & BankExtension & StakingExtension;
 
-  constructor(private tmClient: Tendermint34Client) {
-    if (tmClient) {
-        this.tmClient = tmClient;
-        this.queryClient = QueryClient.withExtensions(tmClient, setupBankExtension, setupStakingExtension);
-    }
+  constructor(tmClient: Tendermint34Client) {
+    this.queryClient = QueryClient.withExtensions(tmClient, setupBankExtension, setupStakingExtension);
   }
 
   static async connect(endpoint: string) {
