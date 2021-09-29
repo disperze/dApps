@@ -61,3 +61,13 @@ export function formatCommission(value: string): string {
 
   return `${val} %`;
 }
+
+export function calculateApr(supply: string, bondedTokens: string): string {
+  const inflation = 0.40;
+  const communityTax = 0.02;
+  const bondedTokensRatio = Number(bondedTokens) / Number(supply);
+
+  const nominalApr = inflation * (1 - communityTax) / bondedTokensRatio;
+
+  return (nominalApr * 100).toFixed(2);
+}
