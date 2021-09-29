@@ -1,12 +1,11 @@
-import { Button } from "antd";
+import { Button, Result } from "antd";
 import { History } from "history";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { PageLayout } from "../../layout/PageLayout";
-import { MainStack, ResultText } from "./style";
 
 interface ResultContent {
-  readonly result: "success" | "failure";
+  readonly result: "success" | "error";
   readonly icon: string;
   readonly buttonText: string;
   readonly buttonAction: () => void;
@@ -54,14 +53,14 @@ export function OperationResult({
     }
 
     return {
-      result: "failure",
+      result: "error",
       icon: failIcon,
       buttonText: "Retry",
       buttonAction: history.goBack,
     };
   }
 
-  const { icon, result, buttonText, buttonAction } = getResultContent(success);
+  const { result, buttonText, buttonAction } = getResultContent(success);
 
   const chosenButtonText = customButtonText || buttonText;
   const chosenButtonAction = customButtonActionPath
@@ -70,14 +69,14 @@ export function OperationResult({
 
   return (
     <PageLayout>
-      <MainStack>
-        <img src={icon} alt="Result icon" />
-        <ResultText data-result={result}>{message}</ResultText>
-        {error && <ResultText data-result={result}>{error}</ResultText>}
-        <Button type="primary" onClick={chosenButtonAction}>
-          {chosenButtonText}
-        </Button>
-      </MainStack>
+      <Result
+        status={result}
+        title={success ? "" : message}
+        subTitle={success ? message : error}
+        extra={[
+          <Button type="primary" onClick={chosenButtonAction}>{chosenButtonText}</Button>,
+        ]}
+      />
     </PageLayout>
   );
 }
