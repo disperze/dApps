@@ -29,19 +29,6 @@ function validatorCompare(a: ValidatorData, b: ValidatorData) {
   return 0;
 }
 
-function validatorCompareCommission(a: ValidatorData, b: ValidatorData) {
-  const feeA = parseInt(a.commission);
-  const feeB = parseInt(b.commission);
-
-  if (feeA < feeB) {
-    return -1;
-  }
-  if (feeA > feeB) {
-    return 1;
-  }
-  return 0;
-}
-
 export function Validators(): JSX.Element {
   const history = useHistory();
   const { getStakingClient, config } = useSdk();
@@ -51,7 +38,6 @@ export function Validators(): JSX.Element {
 
   useEffect(() => {
     (async function updateValidatorsData() {
-      const rand =  Math.floor((Math.random() * 100) % 2);
       const { validators } = await getStakingClient().staking.validators("BOND_STATUS_BONDED");
       const validatorsData: readonly ValidatorData[] = validators
         .map((validator) => ({
@@ -59,7 +45,7 @@ export function Validators(): JSX.Element {
           address: validator.operatorAddress,
           commission: validator.commission.commissionRates.rate
         }))
-        .sort(rand ? validatorCompareCommission: validatorCompare);
+        .sort(validatorCompare);
 
       setValidatorsData(validatorsData);
     })();
