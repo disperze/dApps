@@ -36,6 +36,8 @@ export function Validators(): JSX.Element {
   const [validatorsData, setValidatorsData] = useState<readonly ValidatorData[]>([]);
   const [nominalApr, setNominalApr] = useState<string>();
 
+  const isMainnet = (chain?: string) => chain === "juno-1";
+
   useEffect(() => {
     (async function updateValidatorsData() {
       const { validators } = await getStakingClient().staking.validators("BOND_STATUS_BONDED");
@@ -53,7 +55,9 @@ export function Validators(): JSX.Element {
 
   useEffect(() => {
     (async function updateApr() {
-      if (!config.rpcUrl) return;
+      if (!config.rpcUrl || !isMainnet(config.chainId)) return;
+
+      console.log("mainnet");
 
       const client = await AprClient.connect(config.rpcUrl);
       const supply = await client.getSupply(config.stakingToken!);
@@ -76,9 +80,11 @@ export function Validators(): JSX.Element {
           <AccountMenu />
         </MenuHeader>
         <Title>Validators</Title>
-        <AprStack>
-          <SubText>APR:</SubText> {nominalApr ? (<AprText>{nominalApr}%</AprText>) : <LoadingOutlined />}
-        </AprStack>
+        {!isMainnet(config.chainId) ? (""): (
+          <AprStack>
+            <SubText>APR:</SubText> {nominalApr ? (<AprText>{nominalApr}%</AprText>) : <LoadingOutlined />}
+          </AprStack>
+        )}
         <ValidatorStack>
           <Row style={{marginBottom: "1.5rem"}}>
             <Col span={16} style={{ textAlign: "left" }}>
