@@ -51,6 +51,7 @@ export function Validators(): JSX.Element {
 
   useEffect(() => {
     (async function updateValidatorsData() {
+      const rand =  Math.floor((Math.random() * 100) % 2);
       const { validators } = await getStakingClient().staking.validators("BOND_STATUS_BONDED");
       const validatorsData: readonly ValidatorData[] = validators
         .map((validator) => ({
@@ -58,7 +59,7 @@ export function Validators(): JSX.Element {
           address: validator.operatorAddress,
           commission: validator.commission.commissionRates.rate
         }))
-        .sort(validatorCompare);
+        .sort(rand ? validatorCompareCommission: validatorCompare);
 
       setValidatorsData(validatorsData);
     })();
