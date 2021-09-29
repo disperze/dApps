@@ -20,6 +20,18 @@ export const ValidatorStack = styled(Stack)`
   }
 `;
 
+export const AprStack = styled.div`
+  margin: 0;
+`;
+
+export const SubText = styled.span`
+  font-size: small;
+`;
+
+export const AprText = styled.span`
+  font-size: larger;
+`;
+
 export const BorderContainer = styled.div`
   --v-padding: var(--s-2);
   --border-size: 1px;

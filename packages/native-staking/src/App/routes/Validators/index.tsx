@@ -1,13 +1,15 @@
 import { PageLayout } from "@cosmicdapp/design";
 import { useSdk } from "@cosmicdapp/logic";
 import { Typography } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import { Row, Col } from 'antd';
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AccountMenu } from "../../components/AccountMenu";
 import { pathValidators } from "../../paths";
-import { formatCommission } from "../../utils/staking";
-import { BorderContainer, MainStack, MenuHeader, ValidatorStack } from "./style";
+import { AprClient } from "../../utils/aprclient";
+import { calculateApr, formatCommission } from "../../utils/staking";
+import { AprStack, AprText, BorderContainer, MainStack, MenuHeader, SubText, ValidatorStack } from "./style";
 
 const { Title, Text } = Typography;
 
@@ -42,9 +44,10 @@ function validatorCompareCommission(a: ValidatorData, b: ValidatorData) {
 
 export function Validators(): JSX.Element {
   const history = useHistory();
-  const { getStakingClient } = useSdk();
+  const { getStakingClient, config } = useSdk();
 
   const [validatorsData, setValidatorsData] = useState<readonly ValidatorData[]>([]);
+  const [nominalApr, setNominalApr] = useState<string>();
 
   useEffect(() => {
     (async function updateValidatorsData() {
@@ -61,6 +64,19 @@ export function Validators(): JSX.Element {
     })();
   }, [getStakingClient]);
 
+  useEffect(() => {
+    (async function updateApr() {
+      if (!config.rpcUrl) return;
+
+      const client = await AprClient.connect(config.rpcUrl);
+      const supply = await client.getSupply(config.stakingToken!);
+      const stakingPool = await client.getStakingPool();
+
+      const apr = calculateApr(supply.amount, stakingPool.pool!.bondedTokens);
+      setNominalApr(apr);
+    })();
+  }, [config]);
+
   function goToValidator(address: string) {
     history.push(`${pathValidators}/${address}`);
   }
@@ -73,6 +89,9 @@ export function Validators(): JSX.Element {
           <AccountMenu />
         </MenuHeader>
         <Title>Validators</Title>
+        <AprStack>
+          <SubText>APR:</SubText> {nominalApr ? (<AprText>{nominalApr}%</AprText>) : <LoadingOutlined />}
+        </AprStack>
         <ValidatorStack>
           <Row style={{marginBottom: "1.5rem"}}>
             <Col span={16} style={{ textAlign: "left" }}>
