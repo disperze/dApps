@@ -65,5 +65,21 @@ const heranet: AppConfig = {
   gasPrice: 0.025,
 };
 
-const configs: NetworkConfigs = { local, musselnet, lucinanet, heranet };
+
+const juno1: AppConfig = {
+  chainId: "juno-1",
+  chainName: "Juno",
+  addressPrefix: "juno",
+  rpcUrl: "https://rpc.juno.disperze.network",
+  httpUrl: "https://lcd.juno.disperze.network",
+  faucetUrl: "",
+  feeToken: "ujuno",
+  stakingToken: "ujuno",
+  coinMap: {
+    ujuno: { denom: "JUNO", fractionalDigits: 6 },
+  },
+  gasPrice: 0.025,
+};
+
+const configs: NetworkConfigs = { local, musselnet, lucinanet, heranet, juno1 };
 export const config = getAppConfig(configs);
