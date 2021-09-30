@@ -10,12 +10,12 @@ import {
   WalletLoader,
 } from "@cosmicdapp/logic";
 import { GlobalOutlined, UsbOutlined } from "@ant-design/icons";
-import { Button, Typography } from "antd";
+import { Avatar, Button, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { PageLayout } from "../../layout/PageLayout";
 import { Loading } from "../../logic/Loading";
-import { ErrorText, LightText, MainStack, WelcomeStack } from "./style";
+import { ErrorText, CenterBox, LightText, MainStack, WelcomeStack } from "./style";
 
 const { Title } = Typography;
 
@@ -113,6 +113,9 @@ export function Login({ config, pathAfterLogin, appName, appLogo, ...restProps }
             <GlobalOutlined /> Keplr (Secure)
           </Button>
         </WelcomeStack>
+        <CenterBox>
+          <Avatar src="https://avatars.githubusercontent.com/u/71741453?s=200&v=4" /> by Disperze
+        </CenterBox>
       </MainStack>
     </PageLayout>
   );

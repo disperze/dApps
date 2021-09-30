@@ -24,3 +24,10 @@ export const LightText = styled(Text)`
 export const ErrorText = styled(Text)`
   color: var(--color-red);
 `;
+
+export const CenterBox = styled.div`
+  width: 100%;
+  text-align: center;
+  --gap: var(--s3)
+`;
+
