@@ -20,6 +20,10 @@ interface ValidatorData {
 }
 
 function validatorCompare(a: ValidatorData, b: ValidatorData) {
+  if (!isValidChar(a.name) || !isValidChar(b.name)) {
+    return 1;
+  }
+
   if (a.name < b.name) {
     return -1;
   }
@@ -27,6 +31,13 @@ function validatorCompare(a: ValidatorData, b: ValidatorData) {
     return 1;
   }
   return 0;
+}
+
+function isValidChar(text: string): boolean {
+  if (!text) return false;
+
+  const code = text.charCodeAt(0);
+  return code > 64 && code < 123;
 }
 
 export function Validators(): JSX.Element {
@@ -56,8 +67,6 @@ export function Validators(): JSX.Element {
   useEffect(() => {
     (async function updateApr() {
       if (!config.rpcUrl || !isMainnet(config.chainId)) return;
-
-      console.log("mainnet");
 
       const client = await AprClient.connect(config.rpcUrl);
       const supply = await client.getSupply(config.stakingToken!);
