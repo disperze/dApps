@@ -54,11 +54,11 @@ export async function loadLedgerWallet(_chainId: string, addressPrefix?: string)
 
 export async function loadKeplrWallet(chainId: string): Promise<OfflineSigner> {
   const anyWindow: any = window;
-  if (!anyWindow.getOfflineSigner) {
+  if (!anyWindow.getOfflineSignerAuto) {
     throw new Error("Keplr extension is not available");
   }
 
-  const signer = anyWindow.getOfflineSigner(chainId);
+  const signer = anyWindow.getOfflineSignerAuto(chainId);
   signer.signAmino = signer.signAmino ?? signer.sign;
 
   return Promise.resolve(signer);
