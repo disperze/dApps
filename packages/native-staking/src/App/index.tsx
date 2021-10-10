@@ -11,6 +11,7 @@ import {
   pathUndelegate,
   pathValidators,
 } from "./paths";
+import { AllRewards } from "./routes/AllRewards";
 import { Delegate } from "./routes/Delegate";
 import { Login } from "./routes/Login";
 import { OperationResult } from "./routes/OperationResult";
@@ -33,6 +34,7 @@ export function App(): JSX.Element {
               <Route exact path={pathLogin} component={Login} />
               <ProtectedSwitch authPath={pathLogin}>
                 <Route exact path={pathValidators} component={Validators} />
+                <Route exact path={pathRewards} component={AllRewards} />
                 <Route exact path={`${pathValidators}${paramValidatorAddress}`} component={Validator} />
                 <Route
                   exact
