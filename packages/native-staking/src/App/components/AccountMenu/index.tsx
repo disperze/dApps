@@ -13,11 +13,15 @@ import {
   AvatarName,
   CloseAccountStack,
   CloseMenuButton,
+  LinksStack,
+  LinkText,
   MenuCenter,
   MenuStack,
   NameText,
   OpenMenuButton,
 } from "./style";
+import { pathValidators, pathAllRewards } from "../../paths";
+import { useHistory } from "react-router-dom";
 const { Text } = Typography;
 
 export interface AccountMenuProps extends React.HTMLAttributes<HTMLOrSVGElement> {
@@ -26,17 +30,15 @@ export interface AccountMenuProps extends React.HTMLAttributes<HTMLOrSVGElement>
 
 export function AccountMenu({ name, ...props }: AccountMenuProps): JSX.Element {
   const { address, balance } = useSdk();
+  const history = useHistory();
 
-  // NOTE Link functionality not clear, removing for now
-  /* const history = useHistory();
-   function goToHelp() {
-    //TODO: set path to help
-    history.push(pathValidator);
+  function goToValidators() {
+    history.push(pathValidators);
   }
-  function goToLogout() {
-    //TODO: set path to logout
-    history.push(pathValidator);
-  } */
+
+  function goToMyRewards() {
+    history.push(pathAllRewards);
+  }
 
   const [open, setOpen] = useState(false);
   const openMenu = () => setOpen(true);
@@ -73,15 +75,14 @@ export function AccountMenu({ name, ...props }: AccountMenuProps): JSX.Element {
               </AddressCopyBox>
             </CloseAccountStack>
             {
-              // NOTE Link functionality not clear, removing for now
-              /* <LinksStack>
-              <div onClick={goToHelp}>
-                <LinkText>Help</LinkText>
+            <LinksStack>
+              <div onClick={goToMyRewards}>
+                <LinkText>My Rewards</LinkText>
               </div>
-              <div onClick={goToLogout}>
-                <LinkText>Logout</LinkText>
+              <div onClick={goToValidators}>
+                <LinkText>Validators</LinkText>
               </div>
-            </LinksStack> */
+            </LinksStack>
             }
           </MenuStack>
         </MenuCenter>

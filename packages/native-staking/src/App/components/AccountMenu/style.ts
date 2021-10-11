@@ -88,7 +88,7 @@ export const LinkText = styled(Text)`
   cursor: pointer;
 
   font-family: var(--ff-iceland);
-  font-size: var(--s5);
+  font-size: var(--s2);
 
   color: inherit;
 `;
