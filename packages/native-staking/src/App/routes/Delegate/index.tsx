@@ -2,7 +2,7 @@ import { Loading, PageLayout } from "@cosmicdapp/design";
 import { displayAmountToNative, getErrorFromStackTrace, useSdk } from "@cosmicdapp/logic";
 import { Coin } from "@cosmjs/stargate";
 import { isBroadcastTxFailure } from "@cosmjs/stargate";
-import { Typography } from "antd";
+import { Alert, Typography } from "antd";
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { config } from "../../../config";
@@ -75,6 +75,13 @@ export function Delegate(): JSX.Element {
             <Title>Delegate</Title>
             <Title level={2}>{validator?.description.moniker ?? ""}</Title>
           </HeaderTitleStack>
+          <Alert
+            style={{marginTop: "10px"}}
+            message="Unbonding time: 28 days"
+            description="You will need to undelegate in order for your staked assets to be liquid again. This process will take 28 days to complete."
+            type="error"
+            closable
+          />
           <FormDelegateBalance submitDelegateBalance={submitDelegateBalance} />
         </MainStack>
       </PageLayout>
