@@ -76,7 +76,7 @@ const juno1: AppConfig = {
   feeToken: "ujuno",
   stakingToken: "ujuno",
   coinMap: {
-    ujuno: { denom: "JUNO", fractionalDigits: 6 },
+    ujuno: { denom: "JUNO", fractionalDigits: 6, coingecko: 'juno-network' },
   },
   gasPrice: 0.025,
 };
