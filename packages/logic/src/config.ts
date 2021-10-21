@@ -112,6 +112,6 @@ export function configKeplr(config: AppConfig): KeplrConfig {
     },
     bip44: { coinType: 118 },
     coinType: 118,
-    features: ["stargate", 'ibc-transfer', 'cosmwasm']
+    features: ["stargate", 'ibc-transfer', 'cosmwasm', 'no-legacy-stdTx']
   };
 }
