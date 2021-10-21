@@ -4,6 +4,7 @@ export interface KeplrCoin {
   readonly coinDenom: string;
   readonly coinMinimalDenom: string;
   readonly coinDecimals: number;
+  readonly coinGeckoId?: string;
 }
 
 export interface KeplrConfig {
@@ -82,11 +83,13 @@ export function configKeplr(config: AppConfig): KeplrConfig {
         coinDenom: config.coinMap[config.feeToken].denom,
         coinMinimalDenom: config.feeToken,
         coinDecimals: config.coinMap[config.feeToken].fractionalDigits,
+        coinGeckoId: config.coinMap[config.feeToken].coingecko,
       },
       {
         coinDenom: config.coinMap[config.stakingToken].denom,
         coinMinimalDenom: config.stakingToken,
         coinDecimals: config.coinMap[config.stakingToken].fractionalDigits,
+        coinGeckoId: config.coinMap[config.stakingToken].coingecko,
       },
     ],
     feeCurrencies: [
@@ -100,6 +103,7 @@ export function configKeplr(config: AppConfig): KeplrConfig {
       coinDenom: config.coinMap[config.stakingToken].denom,
       coinMinimalDenom: config.stakingToken,
       coinDecimals: config.coinMap[config.stakingToken].fractionalDigits,
+      coinGeckoId: config.coinMap[config.stakingToken].coingecko,
     },
     gasPriceStep: {
       low: config.gasPrice / 2,

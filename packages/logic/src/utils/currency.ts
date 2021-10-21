@@ -24,6 +24,7 @@ export function printableBalance(balance?: readonly Coin[]): string {
 export interface MappedCoin {
   readonly denom: string;
   readonly fractionalDigits: number;
+  readonly coingecko?: string;
 }
 
 export interface CoinMap {
