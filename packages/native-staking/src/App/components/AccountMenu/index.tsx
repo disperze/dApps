@@ -77,7 +77,7 @@ export function AccountMenu({ name, ...props }: AccountMenuProps): JSX.Element {
             {
             <LinksStack>
               <div onClick={goToMyRewards}>
-                <LinkText>My Rewards</LinkText>
+                <LinkText>My Stake</LinkText>
               </div>
               <div onClick={goToValidators}>
                 <LinkText>Validators</LinkText>
