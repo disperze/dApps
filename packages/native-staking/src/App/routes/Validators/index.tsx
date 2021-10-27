@@ -53,6 +53,7 @@ export function Validators(): JSX.Element {
     (async function updateValidatorsData() {
       const { validators } = await getStakingClient().staking.validators("BOND_STATUS_BONDED");
       const validatorsData: readonly ValidatorData[] = validators
+        .filter(validator => !validator.description.moniker.includes("0%"))
         .map((validator) => ({
           name: validator.description.moniker,
           address: validator.operatorAddress,
