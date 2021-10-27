@@ -1,5 +1,5 @@
 import { Loading, PageLayout } from "@cosmicdapp/design";
-import { getErrorFromStackTrace, useSdk } from "@cosmicdapp/logic";
+import { getErrorFromStackTrace, printableBalance, useSdk } from "@cosmicdapp/logic";
 import { Decimal } from "@cosmjs/math";
 import { Typography } from "antd";
 import { Row, Col, Button } from 'antd';
@@ -22,12 +22,49 @@ interface ValidatorData {
   readonly status: number;
 }
 
+interface UnbondData {
+  readonly name: string;
+  readonly address: string;
+  readonly balance: string;
+  readonly complete: Date;
+}
+
 export function AllRewards(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [hasRewards, setRewards] = useState(false);
   const history = useHistory();
   const { address, config, getStakingClient, getClient, refreshBalance } = useSdk();
   const [validatorsData, setValidatorsData] = useState<readonly ValidatorData[]>([]);
+  const [unbondData, setUnbondDate] = useState<readonly UnbondData[]>([]);
+
+  useEffect(() => {
+    (async function updateUnbonding() {
+      const client = getStakingClient();
+      const result = await client.staking.delegatorUnbondingDelegations(address);
+
+      let validatorsPromise: Promise<QueryValidatorResponse>[] = [];
+      result.unbondingResponses.forEach(unbonding => {
+        validatorsPromise.push(client.staking.validator(unbonding.validatorAddress));
+      });
+
+      const validators = await Promise.all(validatorsPromise)
+
+      let unbondData: UnbondData[] = [];
+      result.unbondingResponses.forEach(unbonding => {
+        const validator = validators.find(v => v.validator.operatorAddress === unbonding.validatorAddress);
+        const entries = unbonding.entries.map(entry => ({
+          name: validator.validator.description.moniker,
+          address: unbonding.validatorAddress,
+          balance: entry.balance,
+          complete: entry.completionTime,
+        }));
+
+        unbondData.push(...entries);
+      });
+
+      setUnbondDate(unbondData);
+    })();
+  }, [getStakingClient, address]);
 
   useEffect(() => {
     (async function updateValidatorsData() {
@@ -64,6 +101,19 @@ export function AllRewards(): JSX.Element {
 
   function goToValidator(address: string) {
     history.push(`${pathValidators}/${address}`);
+  }
+
+  function getTimeLeft(data: Date) {
+    const now = new Date();
+    const diff = data.getTime() - now.getTime();
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    if (days > 0) {
+      return days + "days";
+    }
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    return hours + "hours";
   }
 
   async function withdrawRewards() {
@@ -145,7 +195,7 @@ export function AllRewards(): JSX.Element {
                 <Col span={16} style={{textAlign: "left"}}>
                   <Text>{validator.name}</Text>
                 </Col>
-                <Col span={8}>
+                <Col span={8} style={{ textAlign: "right" }}>
                   <Text>{validator.rewards}</Text>
                 </Col>
               </Row>
@@ -155,6 +205,29 @@ export function AllRewards(): JSX.Element {
         <Button type="primary" disabled={!hasRewards} onClick={withdrawRewards}>
           Withdraw all rewards
         </Button>
+        <Title>Unbonding</Title>
+        <ValidatorStack>
+          <Row style={{marginBottom: "1.5rem"}}>
+            <Col span={16} style={{ textAlign: "left" }}>
+              <Text>Validator</Text>
+            </Col>
+            <Col span={8} style={{ textAlign: "right" }}>
+              <Text>Time left</Text>
+            </Col>
+          </Row>
+          {unbondData.map((unbond) => (
+            <BorderContainer key={unbond.name}>
+              <Row onClick={() => goToValidator(unbond.address)}>
+                <Col span={16} style={{textAlign: "left"}}>
+                  <Text>{unbond.name} [{printableBalance([{amount: unbond.balance, denom: config.stakingToken}])}]</Text>
+                </Col>
+                <Col span={8} style={{ textAlign: "right" }}>
+                  <Text>{getTimeLeft(unbond.complete)}</Text>
+                </Col>
+              </Row>
+            </BorderContainer>
+          ))}
+        </ValidatorStack>
       </MainStack>
     </PageLayout>
     ))
