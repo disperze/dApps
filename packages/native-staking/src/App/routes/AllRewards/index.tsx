@@ -205,6 +205,7 @@ export function AllRewards(): JSX.Element {
         <Button type="primary" disabled={!hasRewards} onClick={withdrawRewards}>
           Withdraw all rewards
         </Button>
+        {unbondData.length === 0 ? <></> : <>
         <Title>Unbonding</Title>
         <ValidatorStack>
           <Row style={{marginBottom: "1.5rem"}}>
@@ -228,6 +229,7 @@ export function AllRewards(): JSX.Element {
             </BorderContainer>
           ))}
         </ValidatorStack>
+        </>}
       </MainStack>
     </PageLayout>
     ))
