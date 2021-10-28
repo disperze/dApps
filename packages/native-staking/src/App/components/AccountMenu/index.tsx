@@ -29,7 +29,7 @@ export interface AccountMenuProps extends React.HTMLAttributes<HTMLOrSVGElement>
 }
 
 export function AccountMenu({ name, ...props }: AccountMenuProps): JSX.Element {
-  const { address, balance } = useSdk();
+  const { address, balance, config } = useSdk();
   const history = useHistory();
 
   function goToValidators() {
@@ -45,11 +45,12 @@ export function AccountMenu({ name, ...props }: AccountMenuProps): JSX.Element {
   const closeMenu = () => setOpen(false);
 
   const accountName = name ? `${name}'s` : "Your";
+  const isMainnet = (chain?: string) => chain === "juno-1";
 
   return (
     <>
       <Badge
-        count={"mainnet"}
+        count={isMainnet(config.chainId) ? "mainnet": config.chainId}
         style={{ backgroundColor: 'var(--color-primary)', marginTop: "8px" }}
       />
       <OpenMenuButton src={openMenuButton} alt="Open account menu" onClick={openMenu} {...props} />

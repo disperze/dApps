@@ -35,36 +35,20 @@ const musselnet: AppConfig = {
   codeId: 5,
 };
 
-const lucinanet: AppConfig = {
-  chainId: "lucina",
-  chainName: "Juno testnet",
+const uninet: AppConfig = {
+  chainId: "uni",
+  chainName: "Juno Testnet",
   addressPrefix: "juno",
   rpcUrl: "https://rpc.juno.giansalex.dev",
   httpUrl: "https://lcd.juno.giansalex.dev",
   faucetUrl: "",
-  feeToken: "ujuno",
-  stakingToken: "ujuno",
+  feeToken: "ujunox",
+  stakingToken: "ujunox",
   coinMap: {
-    ujuno: { denom: "JUNO", fractionalDigits: 6 },
+    ujunox: { denom: "JUNO", fractionalDigits: 6 },
   },
   gasPrice: 0.025,
 };
-
-const heranet: AppConfig = {
-  chainId: "hera",
-  chainName: "Juno Hera",
-  addressPrefix: "juno",
-  rpcUrl: "https://rpc.hera.giansalex.dev",
-  httpUrl: "https://lcd.hera.giansalex.dev",
-  faucetUrl: "",
-  feeToken: "ujuno",
-  stakingToken: "ujuno",
-  coinMap: {
-    ujuno: { denom: "JUNO", fractionalDigits: 6 },
-  },
-  gasPrice: 0.025,
-};
-
 
 const juno1: AppConfig = {
   chainId: "juno-1",
@@ -81,5 +65,5 @@ const juno1: AppConfig = {
   gasPrice: 0.025,
 };
 
-const configs: NetworkConfigs = { local, musselnet, lucinanet, heranet, juno1 };
+const configs: NetworkConfigs = { local, musselnet, uninet, juno1 };
 export const config = getAppConfig(configs);
