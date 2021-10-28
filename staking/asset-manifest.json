@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/staking/static/css/main.cd56b97b.chunk.css",
+    "main.js": "/staking/static/js/main.83d68c9f.chunk.js",
+    "runtime-main.js": "/staking/static/js/runtime-main.8675cf34.js",
+    "static/css/2.129b9b5f.chunk.css": "/staking/static/css/2.129b9b5f.chunk.css",
+    "static/js/2.d3d27298.chunk.js": "/staking/static/js/2.d3d27298.chunk.js",
+    "index.html": "/staking/index.html",
+    "precache-manifest.5a75cdc559f27cfbdce473423544263d.js": "/staking/precache-manifest.5a75cdc559f27cfbdce473423544263d.js",
+    "service-worker.js": "/staking/service-worker.js",
+    "static/js/2.d3d27298.chunk.js.LICENSE.txt": "/staking/static/js/2.d3d27298.chunk.js.LICENSE.txt",
+    "static/media/avatar.svg": "/staking/static/media/avatar.bf84890a.svg",
+    "static/media/backArrow.svg": "/staking/static/media/backArrow.526bf197.svg",
+    "static/media/copy.svg": "/staking/static/media/copy.67684d59.svg",
+    "static/media/cosmWasmLogo.svg": "/staking/static/media/cosmWasmLogo.4939303a.svg",
+    "static/media/cross.svg": "/staking/static/media/cross.176acc35.svg",
+    "static/media/failIcon.svg": "/staking/static/media/failIcon.fc124c19.svg",
+    "static/media/hamburger.svg": "/staking/static/media/hamburger.e38e726c.svg",
+    "static/media/successIcon.svg": "/staking/static/media/successIcon.13d3bd8e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8675cf34.js",
+    "static/css/2.129b9b5f.chunk.css",
+    "static/js/2.d3d27298.chunk.js",
+    "static/css/main.cd56b97b.chunk.css",
+    "static/js/main.83d68c9f.chunk.js"
+  ]
+}
