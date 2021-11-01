@@ -33,21 +33,21 @@ const musselnet: AppConfig = {
   codeId: 3,
 };
 
-const lucinanet: AppConfig = {
-  chainId: "lucina",
-  chainName: "Juno testnet",
+const uninet: AppConfig = {
+  chainId: "uni",
+  chainName: "Juno Testnet",
   addressPrefix: "juno",
   rpcUrl: "https://rpc.juno.giansalex.dev",
   httpUrl: "https://lcd.juno.giansalex.dev",
-  faucetUrl: "https://faucet.musselnet.cosmwasm.com",
-  feeToken: "ujuno",
-  stakingToken: "ujuno",
+  faucetUrl: "",
+  feeToken: "ujunox",
+  stakingToken: "ujunox",
   coinMap: {
-    ujuno: { denom: "JUNO", fractionalDigits: 6 },
+    ujuno: { denom: "JUNOX", fractionalDigits: 6 },
   },
   gasPrice: 0.025,
-  codeId: 3,
+  codeId: 1,
 };
 
-const configs: NetworkConfigs = { local, musselnet, lucinanet };
+const configs: NetworkConfigs = { local, musselnet, uninet };
 export const config = getAppConfig(configs);
