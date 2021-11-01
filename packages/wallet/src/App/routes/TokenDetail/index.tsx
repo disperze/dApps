@@ -5,7 +5,7 @@ import {
   nativeCoinToDisplay,
   useSdk,
 } from "@cosmicdapp/logic";
-import { Coin } from "@cosmjs/stargate";
+import { calculateFee, Coin } from "@cosmjs/stargate";
 import { isBroadcastTxFailure } from "@cosmjs/stargate";
 import { Typography } from "antd";
 import React, { useState } from "react";
@@ -45,9 +45,10 @@ export function TokenDetail(): JSX.Element {
 
     const nativeTokenToTransfer: Coin = { denom: tokenName, amount: amountToTransfer };
     const transferAmount: readonly Coin[] = [nativeTokenToTransfer];
+    const fee = calculateFee(400000, `${config.gasPrice}${config.feeToken}`);
 
     getClient()
-      .sendTokens(userAddress, recipientAddress, transferAmount)
+      .sendTokens(userAddress, recipientAddress, transferAmount, fee)
       .then((result) => {
         if (isBroadcastTxFailure(result)) {
           return Promise.reject(result.rawLog);
