@@ -7,7 +7,7 @@ import {
   setupStakingExtension,
   Coin,
 } from "@cosmjs/stargate";
-import { QueryPoolResponse } from "@cosmjs/stargate/build/codec/cosmos/staking/v1beta1/query";
+import { QueryPoolResponse } from "cosmjs-types/cosmos/staking/v1beta1/query";
 
 export class AprClient {
   private queryClient: QueryClient & BankExtension & StakingExtension;

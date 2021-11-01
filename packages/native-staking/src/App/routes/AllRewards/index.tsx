@@ -8,10 +8,10 @@ import { useHistory } from "react-router-dom";
 import { AccountMenu } from "../../components/AccountMenu";
 import { pathValidators, pathAllRewards, pathOperationResult } from "../../paths";
 import { BorderContainer, MainStack, MenuHeader, ValidatorStack } from "./style";
-import { QueryDelegationRewardsResponse } from "@cosmjs/stargate/build/codec/cosmos/distribution/v1beta1/query";
-import { QueryValidatorResponse } from "@cosmjs/stargate/build/codec/cosmos/staking/v1beta1/query";
-import { coins, defaultGasLimits as defaultStargateGasLimits, isBroadcastTxFailure } from "@cosmjs/stargate";
-import { MsgWithdrawDelegatorReward } from "@cosmjs/stargate/build/codec/cosmos/distribution/v1beta1/tx";
+import { QueryDelegationRewardsResponse } from "cosmjs-types/cosmos/distribution/v1beta1/query";
+import { QueryValidatorResponse } from "cosmjs-types/cosmos/staking/v1beta1/query";
+import { coins, isBroadcastTxFailure } from "@cosmjs/stargate";
+import { MsgWithdrawDelegatorReward } from "cosmjs-types/cosmos/distribution/v1beta1/tx";
 
 const { Title, Text } = Typography;
 
@@ -136,7 +136,7 @@ export function AllRewards(): JSX.Element {
           config.gasPrice * 10 ** config.coinMap[config.feeToken].fractionalDigits,
           config.feeToken,
         ),
-        gas: (msgs.length * defaultStargateGasLimits.withdraw).toString(),
+        gas: (msgs.length * 160000).toString(),
       };
 
       const response = await getClient().signAndBroadcast(address, msgs, fee);

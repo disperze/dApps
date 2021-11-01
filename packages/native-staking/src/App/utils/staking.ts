@@ -1,8 +1,8 @@
 import { useError, useSdk } from "@cosmicdapp/logic";
 import { Decimal } from "@cosmjs/math";
-import { Validator } from "@cosmjs/stargate/build/codec/cosmos/staking/v1beta1/staking";
-import { MsgDelegate, MsgUndelegate } from "@cosmjs/stargate/build/codec/cosmos/staking/v1beta1/tx";
-import { MsgWithdrawDelegatorReward } from "@cosmjs/stargate/build/codec/cosmos/distribution/v1beta1/tx";
+import { Validator } from "cosmjs-types/cosmos/staking/v1beta1/staking";
+import { MsgDelegate, MsgUndelegate } from "cosmjs-types/cosmos/staking/v1beta1/tx";
+import { MsgWithdrawDelegatorReward } from "cosmjs-types/cosmos/distribution/v1beta1/tx";
 import { useEffect, useState } from "react";
 
 export type StakingValidator = Validator;
