@@ -1,5 +1,6 @@
 import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
-import { Coin } from "@cosmjs/stargate";
+import { calculateFee, Coin, GasPrice } from "@cosmjs/stargate";
+import { AppConfig } from "config";
 
 export type Expiration =
   | { readonly at_height: number }
@@ -81,8 +82,11 @@ export interface CW20Contract {
   use: (contractAddress: string) => CW20Instance;
 }
 
-export const CW20 = (client: SigningCosmWasmClient): CW20Contract => {
+export const CW20 = (client: SigningCosmWasmClient, config: AppConfig): CW20Contract => {
   const use = (contractAddress: string): CW20Instance => {
+    const gasPrice = GasPrice.fromString(`${config.gasPrice}${config.feeToken}`)
+    const fee = calculateFee(400000, gasPrice);
+
     const balance = async (address: string): Promise<string> => {
       const result = await client.queryContractSmart(contractAddress, { balance: { address } });
       return result.balance;
@@ -127,33 +131,33 @@ export const CW20 = (client: SigningCosmWasmClient): CW20Contract => {
 
     // mints tokens, returns transactionHash
     const mint = async (sender: string, recipient: string, amount: string): Promise<string> => {
-      const result = await client.execute(sender, contractAddress, { mint: { recipient, amount } });
+      const result = await client.execute(sender, contractAddress, { mint: { recipient, amount } }, fee);
       return result.transactionHash;
     };
 
     // transfers tokens, returns transactionHash
     const transfer = async (sender: string, recipient: string, amount: string): Promise<string> => {
-      const result = await client.execute(sender, contractAddress, { transfer: { recipient, amount } });
+      const result = await client.execute(sender, contractAddress, { transfer: { recipient, amount } }, fee);
       return result.transactionHash;
     };
 
     // burns tokens, returns transactionHash
     const burn = async (sender: string, amount: string): Promise<string> => {
-      const result = await client.execute(sender, contractAddress, { burn: { amount } });
+      const result = await client.execute(sender, contractAddress, { burn: { amount } }, fee);
       return result.transactionHash;
     };
 
     const increaseAllowance = async (sender: string, spender: string, amount: string): Promise<string> => {
       const result = await client.execute(sender, contractAddress, {
         increase_allowance: { spender, amount },
-      });
+      }, fee);
       return result.transactionHash;
     };
 
     const decreaseAllowance = async (sender: string, spender: string, amount: string): Promise<string> => {
       const result = await client.execute(sender, contractAddress, {
         decrease_allowance: { spender, amount },
-      });
+      }, fee);
       return result.transactionHash;
     };
 
@@ -165,22 +169,22 @@ export const CW20 = (client: SigningCosmWasmClient): CW20Contract => {
     ): Promise<string> => {
       const result = await client.execute(sender, contractAddress, {
         transfer_from: { owner, recipient, amount },
-      });
+      }, fee);
       return result.transactionHash;
     };
 
     const bond = async (sender: string, coin: Coin): Promise<string> => {
-      const result = await client.execute(sender, contractAddress, { bond: {} }, undefined, [coin]);
+      const result = await client.execute(sender, contractAddress, { bond: {} }, fee, undefined, [coin]);
       return result.transactionHash;
     };
 
     const unbond = async (sender: string, amount: string): Promise<string> => {
-      const result = await client.execute(sender, contractAddress, { unbond: { amount } });
+      const result = await client.execute(sender, contractAddress, { unbond: { amount } }, fee);
       return result.transactionHash;
     };
 
     const claim = async (sender: string): Promise<string> => {
-      const result = await client.execute(sender, contractAddress, { claim: {} });
+      const result = await client.execute(sender, contractAddress, { claim: {} }, fee);
       return result.transactionHash;
     };
 

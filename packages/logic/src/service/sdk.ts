@@ -1,7 +1,6 @@
-import { CosmWasmFeeTable } from "@cosmjs/cosmwasm-stargate";
 import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 import { Bip39, Random } from "@cosmjs/crypto";
-import { defaultGasLimits as defaultStargateGasLimits, GasLimits, GasPrice, makeCosmoshubPath, } from "@cosmjs/stargate";
+import { makeCosmoshubPath, } from "@cosmjs/stargate";
 import { DirectSecp256k1HdWallet, OfflineSigner } from "@cosmjs/proto-signing";
 import { LedgerSigner } from "@cosmjs/ledger-amino";
 import {
@@ -67,20 +66,8 @@ export async function loadKeplrWallet(chainId: string): Promise<OfflineSigner> {
 // this creates a new connection to a server at URL,
 // using a signing keyring generated from the given mnemonic
 export async function createClient(config: AppConfig, signer: OfflineSigner): Promise<SigningCosmWasmClient> {
-  const gasLimits: GasLimits<CosmWasmFeeTable> = {
-    ...defaultStargateGasLimits,
-    upload: 1500000,
-    init: 600000,
-    exec: 400000,
-    migrate: 600000,
-    send: 80000,
-    changeAdmin: 80000,
-  };
-
   return SigningCosmWasmClient.connectWithSigner(config.rpcUrl, signer, {
     prefix: config.addressPrefix,
-    gasPrice: GasPrice.fromString(`${config.gasPrice}${config.feeToken}`),
-    gasLimits: gasLimits,
   });
 }
 
