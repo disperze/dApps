@@ -53,7 +53,7 @@ function TokenList(): JSX.Element {
         addContract(newCw20contract);
       });
     });
-  }, [getClient, addContract, config]);
+  }, [getClient, addContract]);
 
   useEffect(() => {
     const tokenPromises = cw20Contracts.map(getTokenData);

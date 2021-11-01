@@ -41,7 +41,7 @@ function AllowanceAdd(): JSX.Element {
       setTokenName(tokenInfo.symbol);
       setTokenDecimals(tokenInfo.decimals);
     });
-  }, [getClient, contractAddress, config]);
+  }, [getClient, contractAddress]);
 
   const submitAddAllowance = (values: FormAddAllowanceFields) => {
     setLoading(true);
