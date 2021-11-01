@@ -20,7 +20,7 @@ function AllowanceEdit(): JSX.Element {
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
-  const { getClient, address } = useSdk();
+  const { getClient, address, config } = useSdk();
 
   const { contractAddress, spenderAddress }: AllowanceEditParams = useParams();
 
@@ -29,14 +29,14 @@ function AllowanceEdit(): JSX.Element {
   const [allowanceAmount, setAllowanceAmount] = useState("0");
 
   useEffect(() => {
-    const cw20Contract = CW20(getClient()).use(contractAddress);
+    const cw20Contract = CW20(getClient(), config).use(contractAddress);
 
     cw20Contract.tokenInfo().then((tokenInfo) => {
       setTokenName(tokenInfo.symbol);
       setTokenDecimals(tokenInfo.decimals);
     });
     cw20Contract.allowance(address, spenderAddress).then(({ allowance }) => setAllowanceAmount(allowance));
-  }, [getClient, contractAddress, address, spenderAddress]);
+  }, [getClient, contractAddress, address, spenderAddress, config]);
 
   const submitChangeAmount = (values: FormChangeAmountFields) => {
     setLoading(true);
@@ -45,7 +45,7 @@ function AllowanceEdit(): JSX.Element {
 
     const decNewAmount = Decimal.fromUserInput(newAmount, tokenDecimals);
     const decCurrentAmount = Decimal.fromAtomics(allowanceAmount, tokenDecimals);
-    const cw20Contract = CW20(getClient()).use(contractAddress);
+    const cw20Contract = CW20(getClient(), config).use(contractAddress);
 
     try {
       let allowanceOperation: Promise<string> = Promise.reject("");

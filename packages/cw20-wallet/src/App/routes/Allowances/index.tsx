@@ -24,7 +24,7 @@ interface AllowancesParams {
 
 function Allowances(): JSX.Element {
   const history = useHistory();
-  const { getClient, address } = useSdk();
+  const { getClient, address, config } = useSdk();
 
   const { contractAddress }: AllowancesParams = useParams();
 
@@ -34,7 +34,7 @@ function Allowances(): JSX.Element {
   const [fractionalDigits, setFractionalDigits] = useState(0);
 
   useEffect(() => {
-    const cw20Contract = CW20(getClient()).use(contractAddress);
+    const cw20Contract = CW20(getClient(), config).use(contractAddress);
 
     cw20Contract.tokenInfo().then(({ symbol, decimals }) => {
       setTokenName(symbol);
@@ -42,7 +42,7 @@ function Allowances(): JSX.Element {
     });
     cw20Contract.balance(address).then((balance) => setTokenAmount(balance));
     cw20Contract.allAllowances(address).then(({ allowances }) => setAllowances(allowances));
-  }, [getClient, contractAddress, address]);
+  }, [getClient, contractAddress, address, config]);
 
   function goToAllowancesEdit(spender: string) {
     history.push(`${pathAllowances}/${contractAddress}${pathAllowanceEdit}/${spender}`);

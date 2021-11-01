@@ -20,7 +20,7 @@ function TokenSend(): JSX.Element {
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
-  const { getClient, address, refreshBalance } = useSdk();
+  const { getClient, address, refreshBalance, config } = useSdk();
 
   const { contractAddress, allowingAddress }: TokenSendParams = useParams();
   const fullPathTokenDetail = `${pathTokenDetail}/${contractAddress}/${allowingAddress ?? ""}`;
@@ -30,7 +30,7 @@ function TokenSend(): JSX.Element {
   const [tokenDecimals, setTokenDecimals] = useState(0);
 
   useEffect(() => {
-    const cw20Contract = CW20(getClient()).use(contractAddress);
+    const cw20Contract = CW20(getClient(), config).use(contractAddress);
     const tokenAddress = allowingAddress ?? address;
 
     cw20Contract.tokenInfo().then(({ symbol, decimals }) => {
@@ -43,7 +43,7 @@ function TokenSend(): JSX.Element {
     } else {
       cw20Contract.balance(tokenAddress).then((balance) => setTokenAmount(balance));
     }
-  }, [getClient, contractAddress, allowingAddress, address]);
+  }, [getClient, contractAddress, allowingAddress, address, config]);
 
   const sendTokensAction = (values: FormSendTokensFields) => {
     setLoading(true);
@@ -51,7 +51,7 @@ function TokenSend(): JSX.Element {
     const { address: recipientAddress, amount } = values;
     const transferAmount = Decimal.fromUserInput(amount, tokenDecimals).atomics;
 
-    const cw20Contract = CW20(getClient()).use(contractAddress);
+    const cw20Contract = CW20(getClient(), config).use(contractAddress);
 
     try {
       if (allowingAddress) {

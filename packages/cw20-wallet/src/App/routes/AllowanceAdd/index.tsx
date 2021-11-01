@@ -4,6 +4,7 @@ import { Decimal } from "@cosmjs/math";
 import { Button, Typography } from "antd";
 import { Formik } from "formik";
 import { Form, FormItem, Input } from "formik-antd";
+import { config } from "process";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import backArrowIcon from "../../assets/backArrow.svg";
@@ -34,20 +35,20 @@ function AllowanceAdd(): JSX.Element {
   const [tokenDecimals, setTokenDecimals] = useState(0);
 
   useEffect(() => {
-    const cw20Contract = CW20(getClient()).use(contractAddress);
+    const cw20Contract = CW20(getClient(), config).use(contractAddress);
 
     cw20Contract.tokenInfo().then((tokenInfo) => {
       setTokenName(tokenInfo.symbol);
       setTokenDecimals(tokenInfo.decimals);
     });
-  }, [getClient, contractAddress]);
+  }, [getClient, contractAddress, config]);
 
   const submitAddAllowance = (values: FormAddAllowanceFields) => {
     setLoading(true);
 
     const { address: spenderAddress, amount: newAmount } = values;
 
-    const cw20Contract = CW20(getClient()).use(contractAddress);
+    const cw20Contract = CW20(getClient(), config).use(contractAddress);
 
     cw20Contract.allowance(address, spenderAddress).then(({ allowance }) => {
       const decNewAmount = Decimal.fromUserInput(newAmount, tokenDecimals);

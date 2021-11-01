@@ -14,7 +14,7 @@ import { FormStack, MainStack } from "./style";
 const { Title } = Typography;
 
 function TokensAdd(): JSX.Element {
-  const { getClient } = useSdk();
+  const { getClient, config } = useSdk();
   const { setError } = useError();
   const { addContract } = useContracts();
   const history = useHistory();
@@ -45,7 +45,7 @@ function TokensAdd(): JSX.Element {
         .catch(setError);
     } else {
       const contractAddress = String(contract);
-      const newCw20Contract = CW20(getClient()).use(contractAddress);
+      const newCw20Contract = CW20(getClient(), config).use(contractAddress);
 
       newCw20Contract
         .tokenInfo()
@@ -80,7 +80,7 @@ function TokensAdd(): JSX.Element {
 
   function submitSelectContracts() {
     selectedContractAddresses.forEach((address) => {
-      const newCw20Contract = CW20(getClient()).use(address);
+      const newCw20Contract = CW20(getClient(), config).use(address);
 
       newCw20Contract
         .tokenInfo()

@@ -55,7 +55,7 @@ export function ValidatorHome(): JSX.Element {
 
     (async function updateValidatorData() {
       const contract = await client.getContract(validatorAddress);
-      const cw20Contract = CW20(client).use(contract.address);
+      const cw20Contract = CW20(client, config).use(contract.address);
 
       const [tokenInfo, investment] = await Promise.all([
         cw20Contract.tokenInfo(),
@@ -64,7 +64,7 @@ export function ValidatorHome(): JSX.Element {
 
       setValidatorData({ tokenInfo, investment });
     })();
-  }, [getClient, validatorAddress]);
+  }, [getClient, validatorAddress, config]);
 
   function goToWallet() {
     history.push(`${pathWallet}/${validatorAddress}`);

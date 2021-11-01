@@ -44,10 +44,10 @@ export function Purchase(): JSX.Element {
 
     (async function updateCw20Contract() {
       const contract = await client.getContract(validatorAddress);
-      const cw20Contract = CW20(client).use(contract.address);
+      const cw20Contract = CW20(client, config).use(contract.address);
       setCw20Contract(cw20Contract);
     })();
-  }, [getClient, validatorAddress]);
+  }, [getClient, validatorAddress, config]);
 
   useEffect(() => {
     if (!cw20Contract) return;

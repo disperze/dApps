@@ -39,7 +39,7 @@ export function Claims(): JSX.Element {
 
     (async function updateNameAndClaims() {
       const contract = await client.getContract(validatorAddress);
-      const cw20Contract = CW20(client).use(contract.address);
+      const cw20Contract = CW20(client, config).use(contract.address);
 
       const [{ name }, { claims }] = await Promise.all([
         cw20Contract.tokenInfo(),
@@ -59,7 +59,7 @@ export function Claims(): JSX.Element {
 
       setClaimsData(claimsData.sort((a, b) => a.date.valueOf() - b.date.valueOf()));
     })();
-  }, [getClient, validatorAddress, address]);
+  }, [getClient, validatorAddress, address, config]);
 
   useEffect(() => {
     const decimals = config.coinMap[config.stakingToken].fractionalDigits;
@@ -86,7 +86,7 @@ export function Claims(): JSX.Element {
 
     const client = getClient();
     const contract = await client.getContract(validatorAddress);
-    const cw20Contract = CW20(client).use(contract.address);
+    const cw20Contract = CW20(client, config).use(contract.address);
 
     try {
       const txHash = await cw20Contract.claim(address);

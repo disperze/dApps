@@ -35,7 +35,7 @@ interface WalletParams {
 export function Wallet(): JSX.Element {
   const history = useHistory();
   const { validatorAddress } = useParams<WalletParams>();
-  const { getClient, address } = useSdk();
+  const { getClient, address, config } = useSdk();
 
   const [validatorData, setValidatorData] = useState<ValidatorData>();
 
@@ -44,7 +44,7 @@ export function Wallet(): JSX.Element {
 
     (async function updateValidatorData() {
       const contract = await client.getContract(validatorAddress);
-      const cw20Contract = CW20(client).use(contract.address);
+      const cw20Contract = CW20(client, config).use(contract.address);
 
       const [tokenInfo, investment, balance, { claims }] = await Promise.all([
         cw20Contract.tokenInfo(),
@@ -55,7 +55,7 @@ export function Wallet(): JSX.Element {
 
       setValidatorData({ tokenInfo, investment, balance, numClaims: claims.length });
     })();
-  }, [getClient, validatorAddress, address]);
+  }, [getClient, validatorAddress, address, config]);
 
   function goToValidatorDetail() {
     history.push(`${pathValidator}/${validatorAddress}${pathDetail}`);

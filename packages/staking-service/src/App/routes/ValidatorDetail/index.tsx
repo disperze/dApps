@@ -34,7 +34,7 @@ interface ValidatorDetailParams {
 
 export function ValidatorDetail(): JSX.Element {
   const { validatorAddress } = useParams<ValidatorDetailParams>();
-  const { getClient } = useSdk();
+  const { getClient, config } = useSdk();
 
   const [validatorData, setValidatorData] = useState<ValidatorData>();
 
@@ -43,7 +43,7 @@ export function ValidatorDetail(): JSX.Element {
 
     (async function updateValidatorData() {
       const contract = await client.getContract(validatorAddress);
-      const cw20Contract = CW20(client).use(contract.address);
+      const cw20Contract = CW20(client, config).use(contract.address);
 
       const [tokenInfo, investment] = await Promise.all([
         cw20Contract.tokenInfo(),
@@ -52,7 +52,7 @@ export function ValidatorDetail(): JSX.Element {
 
       setValidatorData({ tokenInfo, investment });
     })();
-  }, [getClient, validatorAddress]);
+  }, [getClient, validatorAddress, config]);
 
   return (
     <PageLayout>

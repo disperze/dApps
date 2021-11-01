@@ -49,11 +49,11 @@ function TokenList(): JSX.Element {
 
     client.getContracts(config.codeId).then((contracts) => {
       contracts.forEach((contract) => {
-        const newCw20contract = CW20(client).use(contract);
+        const newCw20contract = CW20(client, config).use(contract);
         addContract(newCw20contract);
       });
     });
-  }, [getClient, addContract]);
+  }, [getClient, addContract, config]);
 
   useEffect(() => {
     const tokenPromises = cw20Contracts.map(getTokenData);

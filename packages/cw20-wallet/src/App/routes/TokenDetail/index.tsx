@@ -18,7 +18,7 @@ interface TokenDetailParams {
 
 function TokenDetail(): JSX.Element {
   const history = useHistory();
-  const { getClient, address } = useSdk();
+  const { getClient, address, config } = useSdk();
 
   const { contractAddress, allowingAddress: allowingAddressParam }: TokenDetailParams = useParams();
 
@@ -30,7 +30,7 @@ function TokenDetail(): JSX.Element {
   const [fractionalDigits, setFractionalDigits] = useState(0);
 
   useEffect(() => {
-    const cw20Contract = CW20(getClient()).use(contractAddress);
+    const cw20Contract = CW20(getClient(), config).use(contractAddress);
     const tokenAddress = allowingAddress ?? address;
 
     cw20Contract.tokenInfo().then(({ symbol, decimals }) => {
@@ -38,7 +38,7 @@ function TokenDetail(): JSX.Element {
       setFractionalDigits(decimals);
     });
     cw20Contract.balance(tokenAddress).then((balance) => setTokenAmount(balance));
-  }, [getClient, contractAddress, allowingAddress, address]);
+  }, [getClient, contractAddress, allowingAddress, address, config]);
 
   function updateAllowance(allowingAddress: string) {
     if (!allowingAddress) {
@@ -49,7 +49,7 @@ function TokenDetail(): JSX.Element {
 
     setAllowingAddress(allowingAddress);
 
-    const cw20contract = CW20(getClient()).use(contractAddress);
+    const cw20contract = CW20(getClient(), config).use(contractAddress);
     cw20contract.allowance(allowingAddress, address).then((response) => setAllowance(response.allowance));
   }
 

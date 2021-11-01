@@ -34,7 +34,7 @@ function validatorCompare(a: ValidatorData, b: ValidatorData) {
 
 export function Validators(): JSX.Element {
   const history = useHistory();
-  const { getClient } = useSdk();
+  const { getClient, config } = useSdk();
   const { contracts: cw20Contracts, addContract } = useContracts();
 
   const [validatorsData, setValidatorsData] = useState<ValidatorData[]>([]);
@@ -46,11 +46,11 @@ export function Validators(): JSX.Element {
       const contracts = await client.getContracts(config.codeId);
 
       for (const contract of contracts) {
-        const newCw20contract = CW20(client).use(contract);
+        const newCw20contract = CW20(client, config).use(contract);
         addContract(newCw20contract);
       }
     })();
-  }, [getClient, addContract]);
+  }, [getClient, addContract, config]);
 
   useEffect(() => {
     const validatorsDataPromises = cw20Contracts.map(getValidatorData);
