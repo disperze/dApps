@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/wallet/static/css/main.cd56b97b.chunk.css",
+    "main.js": "/wallet/static/js/main.2c30b71e.chunk.js",
+    "runtime-main.js": "/wallet/static/js/runtime-main.86db26d2.js",
+    "static/css/2.d71460c3.chunk.css": "/wallet/static/css/2.d71460c3.chunk.css",
+    "static/js/2.4c67fdc7.chunk.js": "/wallet/static/js/2.4c67fdc7.chunk.js",
+    "index.html": "/wallet/index.html",
+    "precache-manifest.d3c611179fe554cd026e538adf044b08.js": "/wallet/precache-manifest.d3c611179fe554cd026e538adf044b08.js",
+    "service-worker.js": "/wallet/service-worker.js",
+    "static/js/2.4c67fdc7.chunk.js.LICENSE.txt": "/wallet/static/js/2.4c67fdc7.chunk.js.LICENSE.txt",
+    "static/media/backArrow.svg": "/wallet/static/media/backArrow.526bf197.svg",
+    "static/media/cosmWasmLogo.svg": "/wallet/static/media/cosmWasmLogo.4939303a.svg",
+    "static/media/failIcon.svg": "/wallet/static/media/failIcon.fc124c19.svg",
+    "static/media/successIcon.svg": "/wallet/static/media/successIcon.13d3bd8e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.86db26d2.js",
+    "static/css/2.d71460c3.chunk.css",
+    "static/js/2.4c67fdc7.chunk.js",
+    "static/css/main.cd56b97b.chunk.css",
+    "static/js/main.2c30b71e.chunk.js"
+  ]
+}

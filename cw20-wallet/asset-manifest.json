@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/cw20-wallet/static/css/main.cd56b97b.chunk.css",
+    "main.js": "/cw20-wallet/static/js/main.57d6e962.chunk.js",
+    "runtime-main.js": "/cw20-wallet/static/js/runtime-main.0f114c7a.js",
+    "static/css/2.d3747927.chunk.css": "/cw20-wallet/static/css/2.d3747927.chunk.css",
+    "static/js/2.38a4b8a6.chunk.js": "/cw20-wallet/static/js/2.38a4b8a6.chunk.js",
+    "index.html": "/cw20-wallet/index.html",
+    "precache-manifest.38541ea455781fe38122a428002407ef.js": "/cw20-wallet/precache-manifest.38541ea455781fe38122a428002407ef.js",
+    "service-worker.js": "/cw20-wallet/service-worker.js",
+    "static/js/2.38a4b8a6.chunk.js.LICENSE.txt": "/cw20-wallet/static/js/2.38a4b8a6.chunk.js.LICENSE.txt",
+    "static/media/backArrow.svg": "/cw20-wallet/static/media/backArrow.526bf197.svg",
+    "static/media/cosmWasmLogo.svg": "/cw20-wallet/static/media/cosmWasmLogo.4939303a.svg",
+    "static/media/edit.svg": "/cw20-wallet/static/media/edit.c0e94f7b.svg",
+    "static/media/failIcon.svg": "/cw20-wallet/static/media/failIcon.fc124c19.svg",
+    "static/media/successIcon.svg": "/cw20-wallet/static/media/successIcon.13d3bd8e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0f114c7a.js",
+    "static/css/2.d3747927.chunk.css",
+    "static/js/2.38a4b8a6.chunk.js",
+    "static/css/main.cd56b97b.chunk.css",
+    "static/js/main.57d6e962.chunk.js"
+  ]
+}
