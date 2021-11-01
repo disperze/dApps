@@ -43,7 +43,7 @@ const uninet: AppConfig = {
   feeToken: "ujunox",
   stakingToken: "ujunox",
   coinMap: {
-    ujuno: { denom: "JUNOX", fractionalDigits: 6 },
+    ujunox: { denom: "JUNOX", fractionalDigits: 6 },
   },
   gasPrice: 0.025,
   codeId: 1,
