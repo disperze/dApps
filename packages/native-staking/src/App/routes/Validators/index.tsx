@@ -51,7 +51,15 @@ export function Validators(): JSX.Element {
 
   useEffect(() => {
     (async function updateValidatorsData() {
-      const { validators } = await getStakingClient().staking.validators("BOND_STATUS_BONDED");
+
+      const result = await getStakingClient().staking.validators("BOND_STATUS_BONDED");
+      let validators = result.validators;
+      if (result.pagination.nextKey) {
+        const result2 = await getStakingClient().staking.validators("BOND_STATUS_BONDED", result.pagination.nextKey);
+        validators = validators.concat(result2.validators);
+      }
+
+      console.log(validators);
       const validatorsData: readonly ValidatorData[] = validators
         .filter(validator => !validator.description.moniker.includes("0%"))
         .map((validator) => ({
