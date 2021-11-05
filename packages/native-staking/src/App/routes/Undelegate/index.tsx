@@ -1,6 +1,6 @@
 import { Loading, PageLayout } from "@cosmicdapp/design";
 import { displayAmountToNative, getErrorFromStackTrace, useSdk } from "@cosmicdapp/logic";
-import { Coin } from "@cosmjs/stargate";
+import { calculateFee, Coin } from "@cosmjs/stargate";
 import { isBroadcastTxFailure } from "@cosmjs/stargate";
 import { Typography } from "antd";
 import React, { useState } from "react";
@@ -31,9 +31,10 @@ export function Undelegate(): JSX.Element {
     setLoading(true);
     const nativeAmountString = displayAmountToNative(amount, config.coinMap, config.stakingToken);
     const nativeAmountCoin: Coin = { amount: nativeAmountString, denom: config.stakingToken };
+    const fee = calculateFee(160000, `${config.gasPrice}${config.feeToken}`);
 
     try {
-      const response = await getClient().undelegateTokens(address, validatorAddress, nativeAmountCoin);
+      const response = await getClient().undelegateTokens(address, validatorAddress, nativeAmountCoin, fee);
       if (isBroadcastTxFailure(response)) {
         throw Error("Undelegate failed");
       }

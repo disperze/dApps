@@ -1,11 +1,10 @@
 import { Loading, PageLayout } from "@cosmicdapp/design";
 import { displayAmountToNative, getErrorFromStackTrace, useSdk } from "@cosmicdapp/logic";
-import { Coin } from "@cosmjs/stargate";
+import { calculateFee, Coin } from "@cosmjs/stargate";
 import { isBroadcastTxFailure } from "@cosmjs/stargate";
 import { Alert, Typography } from "antd";
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { config } from "../../../config";
 import { HeaderBackMenu } from "../../components/HeaderBackMenu";
 import { pathDelegate, pathOperationResult, pathValidators } from "../../paths";
 import { useStakingValidator } from "../../utils/staking";
@@ -23,7 +22,7 @@ export function Delegate(): JSX.Element {
 
   const history = useHistory();
   const { validatorAddress } = useParams<DelegateParams>();
-  const { getClient, address, refreshBalance } = useSdk();
+  const { getClient, address, refreshBalance, config } = useSdk();
 
   const validator = useStakingValidator(validatorAddress);
 
@@ -32,9 +31,10 @@ export function Delegate(): JSX.Element {
 
     const nativeAmountString = displayAmountToNative(amount, config.coinMap, config.stakingToken);
     const nativeAmountCoin: Coin = { amount: nativeAmountString, denom: config.stakingToken };
+    const fee = calculateFee(160000, `${config.gasPrice}${config.feeToken}`);
 
     try {
-      const response = await getClient().delegateTokens(address, validatorAddress, nativeAmountCoin);
+      const response = await getClient().delegateTokens(address, validatorAddress, nativeAmountCoin, fee);
       if (isBroadcastTxFailure(response)) {
         throw Error("Delegate failed");
       }

@@ -1,6 +1,6 @@
 import { Loading, PageLayout } from "@cosmicdapp/design";
 import { AppConfig, getErrorFromStackTrace, nativeCoinToDisplay, useSdk } from "@cosmicdapp/logic";
-import { Coin } from "@cosmjs/stargate";
+import { calculateFee, Coin } from "@cosmjs/stargate";
 import { isBroadcastTxFailure } from "@cosmjs/stargate";
 import { Button, Typography } from "antd";
 import React, { useEffect, useState } from "react";
@@ -62,9 +62,10 @@ export function Rewards(): JSX.Element {
 
   async function withdrawRewards() {
     setLoading(true);
+    const fee = calculateFee(160000, `${config.gasPrice}${config.feeToken}`);
 
     try {
-      const response = await getClient().withdrawRewards(address, validatorAddress);
+      const response = await getClient().withdrawRewards(address, validatorAddress, fee);
       if (isBroadcastTxFailure(response)) {
         throw Error("Rewards withdrawal failed");
       }

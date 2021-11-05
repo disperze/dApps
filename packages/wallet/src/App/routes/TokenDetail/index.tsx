@@ -45,7 +45,7 @@ export function TokenDetail(): JSX.Element {
 
     const nativeTokenToTransfer: Coin = { denom: tokenName, amount: amountToTransfer };
     const transferAmount: readonly Coin[] = [nativeTokenToTransfer];
-    const fee = calculateFee(400000, `${config.gasPrice}${config.feeToken}`);
+    const fee = calculateFee(80000, `${config.gasPrice}${config.feeToken}`);
 
     getClient()
       .sendTokens(userAddress, recipientAddress, transferAmount, fee)
