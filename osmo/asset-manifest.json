@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/osmo/static/js/main.5a3cf6ab.chunk.js",
+    "main.js": "/osmo/static/js/main.08aaa058.chunk.js",
     "runtime-main.js": "/osmo/static/js/runtime-main.0d4315d7.js",
     "static/js/2.32b7f391.chunk.js": "/osmo/static/js/2.32b7f391.chunk.js",
     "static/js/3.ec8ccd19.chunk.js": "/osmo/static/js/3.ec8ccd19.chunk.js",
@@ -17,6 +17,6 @@
   "entrypoints": [
     "static/js/runtime-main.0d4315d7.js",
     "static/js/2.32b7f391.chunk.js",
-    "static/js/main.5a3cf6ab.chunk.js"
+    "static/js/main.08aaa058.chunk.js"
   ]
 }
