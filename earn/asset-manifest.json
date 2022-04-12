@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/osmo/static/js/main.306a9b30.chunk.js",
-    "runtime-main.js": "/osmo/static/js/runtime-main.5ec3dd05.js",
-    "static/js/2.32c5a6ca.chunk.js": "/osmo/static/js/2.32c5a6ca.chunk.js",
-    "static/js/3.e4f60e14.chunk.js": "/osmo/static/js/3.e4f60e14.chunk.js",
-    "index.html": "/osmo/index.html",
-    "static/js/2.32c5a6ca.chunk.js.LICENSE.txt": "/osmo/static/js/2.32c5a6ca.chunk.js.LICENSE.txt",
-    "static/media/atom.0a8e2ea8.png": "/osmo/static/media/atom.0a8e2ea8.png",
-    "static/media/cosmverse.1075c14e.jpg": "/osmo/static/media/cosmverse.1075c14e.jpg",
-    "static/media/cro.ce9e5a0f.png": "/osmo/static/media/cro.ce9e5a0f.png",
-    "static/media/juno-haz.4b59c13b.svg": "/osmo/static/media/juno-haz.4b59c13b.svg",
-    "static/media/juno.c012943e.svg": "/osmo/static/media/juno.c012943e.svg",
-    "static/media/osmosis.9d9a6263.png": "/osmo/static/media/osmosis.9d9a6263.png",
-    "static/media/user-default.a2e7dd1e.svg": "/osmo/static/media/user-default.a2e7dd1e.svg"
+    "main.js": "/earn/static/js/main.168c6c59.chunk.js",
+    "runtime-main.js": "/earn/static/js/runtime-main.611aa5c9.js",
+    "static/js/2.32c5a6ca.chunk.js": "/earn/static/js/2.32c5a6ca.chunk.js",
+    "static/js/3.e4f60e14.chunk.js": "/earn/static/js/3.e4f60e14.chunk.js",
+    "index.html": "/earn/index.html",
+    "static/js/2.32c5a6ca.chunk.js.LICENSE.txt": "/earn/static/js/2.32c5a6ca.chunk.js.LICENSE.txt",
+    "static/media/atom.0a8e2ea8.png": "/earn/static/media/atom.0a8e2ea8.png",
+    "static/media/cosmverse.1075c14e.jpg": "/earn/static/media/cosmverse.1075c14e.jpg",
+    "static/media/cro.ce9e5a0f.png": "/earn/static/media/cro.ce9e5a0f.png",
+    "static/media/juno-haz.4b59c13b.svg": "/earn/static/media/juno-haz.4b59c13b.svg",
+    "static/media/juno.c012943e.svg": "/earn/static/media/juno.c012943e.svg",
+    "static/media/osmosis.9d9a6263.png": "/earn/static/media/osmosis.9d9a6263.png",
+    "static/media/user-default.a2e7dd1e.svg": "/earn/static/media/user-default.a2e7dd1e.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5ec3dd05.js",
+    "static/js/runtime-main.611aa5c9.js",
     "static/js/2.32c5a6ca.chunk.js",
-    "static/js/main.306a9b30.chunk.js"
+    "static/js/main.168c6c59.chunk.js"
   ]
 }
