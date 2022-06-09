@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/osmo/static/js/main.ce7bd8aa.chunk.js",
-    "runtime-main.js": "/osmo/static/js/runtime-main.c031718f.js",
-    "static/js/2.07d0bb7a.chunk.js": "/osmo/static/js/2.07d0bb7a.chunk.js",
-    "static/js/3.9596bc0c.chunk.js": "/osmo/static/js/3.9596bc0c.chunk.js",
+    "main.js": "/osmo/static/js/main.be5fc4a9.chunk.js",
+    "runtime-main.js": "/osmo/static/js/runtime-main.5ec3dd05.js",
+    "static/js/2.6172c58e.chunk.js": "/osmo/static/js/2.6172c58e.chunk.js",
+    "static/js/3.e4f60e14.chunk.js": "/osmo/static/js/3.e4f60e14.chunk.js",
     "index.html": "/osmo/index.html",
-    "static/js/2.07d0bb7a.chunk.js.LICENSE.txt": "/osmo/static/js/2.07d0bb7a.chunk.js.LICENSE.txt",
+    "static/js/2.6172c58e.chunk.js.LICENSE.txt": "/osmo/static/js/2.6172c58e.chunk.js.LICENSE.txt",
     "static/media/atom.0a8e2ea8.png": "/osmo/static/media/atom.0a8e2ea8.png",
     "static/media/cosmverse.1075c14e.jpg": "/osmo/static/media/cosmverse.1075c14e.jpg",
     "static/media/cro.ce9e5a0f.png": "/osmo/static/media/cro.ce9e5a0f.png",
@@ -15,8 +15,8 @@
     "static/media/user-default.a2e7dd1e.svg": "/osmo/static/media/user-default.a2e7dd1e.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.c031718f.js",
-    "static/js/2.07d0bb7a.chunk.js",
-    "static/js/main.ce7bd8aa.chunk.js"
+    "static/js/runtime-main.5ec3dd05.js",
+    "static/js/2.6172c58e.chunk.js",
+    "static/js/main.be5fc4a9.chunk.js"
   ]
 }
