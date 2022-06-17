@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/osmo/static/js/main.95e3c5ef.chunk.js",
+    "main.js": "/osmo/static/js/main.88fdc155.chunk.js",
     "runtime-main.js": "/osmo/static/js/runtime-main.5ec3dd05.js",
-    "static/js/2.6172c58e.chunk.js": "/osmo/static/js/2.6172c58e.chunk.js",
+    "static/js/2.31b011a2.chunk.js": "/osmo/static/js/2.31b011a2.chunk.js",
     "static/js/3.e4f60e14.chunk.js": "/osmo/static/js/3.e4f60e14.chunk.js",
     "index.html": "/osmo/index.html",
-    "static/js/2.6172c58e.chunk.js.LICENSE.txt": "/osmo/static/js/2.6172c58e.chunk.js.LICENSE.txt",
+    "static/js/2.31b011a2.chunk.js.LICENSE.txt": "/osmo/static/js/2.31b011a2.chunk.js.LICENSE.txt",
     "static/media/atom.0a8e2ea8.png": "/osmo/static/media/atom.0a8e2ea8.png",
     "static/media/cosmverse.1075c14e.jpg": "/osmo/static/media/cosmverse.1075c14e.jpg",
     "static/media/cro.ce9e5a0f.png": "/osmo/static/media/cro.ce9e5a0f.png",
@@ -16,7 +16,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.5ec3dd05.js",
-    "static/js/2.6172c58e.chunk.js",
-    "static/js/main.95e3c5ef.chunk.js"
+    "static/js/2.31b011a2.chunk.js",
+    "static/js/main.88fdc155.chunk.js"
   ]
 }
